@@ -1,7 +1,7 @@
 "use client";  // This ensures this is a client-side component
 
 import { FC, useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { Card } from '@/components/ui/card';
 
 
 const ApplyPage: FC = () => {
+  const router=useRouter()
   const params = useParams<{ id: string }>();
   const id = params.id;  // Extract id from URL params
   console.log(id);
@@ -42,6 +43,13 @@ const ApplyPage: FC = () => {
         'Content-Type': 'application/json',
       },
     });
+    setFormData({
+      name: '',
+      email: '',
+      resumeLink: '',
+      coverLetter: '',
+    })
+    router.replace("/candidate/jobs")
     console.log(res);
   };
 
